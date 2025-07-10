@@ -28,4 +28,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends bash && rm -rf 
 EXPOSE 8080
 
 # Запускаем ttyd при старте контейнера
-CMD ["ttyd", "-p", "0.0.0.0:8080", "bash"]
+CMD ["ttyd", "--bind-addr", "0.0.0.0:8080", "bash"]
