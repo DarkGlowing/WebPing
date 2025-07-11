@@ -61,7 +61,5 @@ EOF
 
 RUN chmod 600 /root/lxde.pem
 
-RUN vncserver -xstartup /usr/bin/startlxqt
-
 EXPOSE $PORT
 CMD ["code-server", "--bind-addr", "0.0.0.0:8080"]
