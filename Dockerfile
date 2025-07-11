@@ -1,5 +1,5 @@
 # Use an official Ubuntu runtime as a parent image
-FROM debian:latest
+FROM ubuntu:16.04
 
 # Set environment variable for the port
 ENV PORT=8080
