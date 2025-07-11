@@ -13,7 +13,11 @@ RUN apt-get update && \
     curl -fsSL https://code-server.dev/install.sh | sh && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN echo 'root:root' | chpasswd
+RUN cat > /root/.config/code-server/config.yaml <<EOF
+    password: encryptroot
+    disable-telemetry: true
+    disable-update-check: true
+    EOF
 
 # Expose the correct port
 EXPOSE $PORT
