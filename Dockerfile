@@ -13,14 +13,14 @@ RUN apt-get update && \
     curl -fsSL https://code-server.dev/install.sh | sh && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN cat > /root/.config/code-server/config.yaml <<EOF
-    password: encryptroot
-    disable-telemetry: true
-    disable-update-check: true
-    EOF
+RUN mkdir -p /root/.config/code-server && \
+    cat > /root/.config/code-server/config.yaml <<EOF
+bind-addr: 0.0.0.0:8080
+auth: password
+password: encryptroot
+disable-telemetry: true
+disable-update-check: true
+EOF
 
-# Expose the correct port
 EXPOSE $PORT
-
-# Start code-server (listen on all interfaces)
-CMD ["code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password"]
+CMD ["code-server", "--bind-addr", "0.0.0.0:8080"]
