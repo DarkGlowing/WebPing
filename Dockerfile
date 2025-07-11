@@ -1,5 +1,5 @@
 # Use an official Ubuntu runtime as a parent image
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 # Set environment variable for the port
 ENV PORT=8080
