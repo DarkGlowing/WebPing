@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates icewm cmake build-essential libjson-c-dev libwebsockets-dev autossh git nano curl wget tigervnc-standalone-server tigervnc-xorg-extension tigervnc-common && \
+    apt-get install -y --no-install-recommends ca-certificates lxde cmake build-essential libjson-c-dev libwebsockets-dev autossh git nano curl wget tigervnc-standalone-server tigervnc-xorg-extension tigervnc-common && \
     update-ca-certificates && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
