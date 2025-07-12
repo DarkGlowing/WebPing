@@ -22,8 +22,6 @@ disable-telemetry: true
 disable-update-check: true
 EOF
 
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && chmod +x /root/google-chrome-stable_current_amd64.deb && apt-get install -y --no-install-recommends ./google-chrome-stable_current_amd64.deb
-
 RUN cat > /root/lxde.pem <<EOF
 -----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAop8SB8njt2vhJlRyhByJBaR3vvXBSXD2TcezyZ/9xgttnppf
