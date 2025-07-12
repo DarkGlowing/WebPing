@@ -1,5 +1,5 @@
 # Use an official Ubuntu runtime as a parent image
-FROM ubuntu:20.04
+FROM ubuntu:16.04
 
 # Set environment variable for the port
 ENV PORT=8080
@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates lxqt-* qterminal falkon autossh git nano curl wget lxqt tigervnc-standalone-server tigervnc-xorg-extension tigervnc-common && \
+    apt-get install -y --no-install-recommends ca-certificates icewm autossh git nano curl wget tigervnc-* && \
     update-ca-certificates && \
     curl -fsSL https://code-server.dev/install.sh | sh && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -22,12 +22,7 @@ disable-telemetry: true
 disable-update-check: true
 EOF
 
-RUN mkdir -p /root/.vnc && \
-    cat > /root/.vnc/config <<EOF
-SecurityTypes=None
-AlwaysShared=1
-rfbport=6501
-EOF
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && chmod +x /root/google-chrome-stable_current_amd64.deb && apt-get install -y --no-install-recommends ./google-chrome-stable_current_amd64.deb
 
 RUN cat > /root/lxde.pem <<EOF
 -----BEGIN RSA PRIVATE KEY-----
