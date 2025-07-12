@@ -8,9 +8,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates icewm autossh git nano curl wget tigervnc-standalone-server tigervnc-xorg-extension tigervnc-common && \
+    apt-get install -y --no-install-recommends ca-certificates icewm cmake build-essential libjson-c-dev libwebsockets-dev autossh git nano curl wget tigervnc-standalone-server tigervnc-xorg-extension tigervnc-common && \
     update-ca-certificates && \
-    curl -fsSL https://code-server.dev/install.sh | sh && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /root/.config/code-server && \
@@ -54,5 +53,15 @@ EOF
 
 RUN chmod 600 /root/lxde.pem
 
+RUN git clone https://github.com/tsl0922/ttyd.git && \
+    cd ttyd && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make && \
+    make install && \
+    cd / && \
+    rm -rf /ttyd
+
 EXPOSE $PORT
-CMD ["code-server", "--bind-addr", "0.0.0.0:8080"]
+CMD ["ttyd", "-i", "0.0.0.0", "-p", "8080", "-o", "-W", "-c", "root:encrypt", "bash"]
